@@ -1,2 +1,2 @@
 # Space Shooter Game
-A space shooter game built with Python. Blast through enemies and conquer the galaxy! 🚀✨
+A space shooter game built with Python. Navigate through space, wreck asteroids, and dodge them to survive while conquering the galaxy! 🚀✨
