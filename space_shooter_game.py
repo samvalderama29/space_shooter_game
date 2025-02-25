@@ -5,14 +5,14 @@ from random import randint, uniform
 
 def show_start_screen():
     start_sound = pygame.mixer.Sound(join('audio', 'start_sound.wav'))
-    font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 60)
-    sub_font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 30)
+    font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 100)
+    sub_font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 50)
 
     title_surf = font.render("SPACE SHOOTER", True, (255, 215, 0))
     title_rect = title_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
 
     sub_surf = sub_font.render("Press any key to start", True, (255, 165, 0))
-    sub_rect = sub_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.75))
+    sub_rect = sub_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.65))
 
     display_surface.fill('#3a2e3f')
     display_surface.blit(title_surf, title_rect)
