@@ -3,6 +3,33 @@ from os.path import join
 
 from random import randint, uniform
 
+def show_start_screen():
+    start_sound = pygame.mixer.Sound(join('audio', 'start_sound.wav'))
+    font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 60)
+    sub_font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 30)
+
+    title_surf = font.render("SPACE SHOOTER", True, (255, 215, 0))
+    title_rect = title_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+
+    sub_surf = sub_font.render("Press any key to start", True, (255, 165, 0))
+    sub_rect = sub_surf.get_rect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.75))
+
+    display_surface.fill('#3a2e3f')
+    display_surface.blit(title_surf, title_rect)
+    display_surface.blit(sub_surf, sub_rect)
+    pygame.display.update()
+
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                start_sound.play()
+                pygame.time.delay(500)
+                waiting = False
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, groups):
@@ -106,7 +133,6 @@ def collisions():
 
     collision_sprites = pygame.sprite.spritecollide(player, meteor_sprites, True, pygame.sprite.collide_mask)
     if collision_sprites:
-        game_over_sound.play()
         display_game_over()
         pygame.time.delay(2000)
         running = False
@@ -126,7 +152,10 @@ def display_score():
     pygame.draw.rect(display_surface, (240, 240, 240), text_rect.inflate(20, 10).move(0, -8), 5, 10)
 
 def display_game_over():
-    text_surf = font.render("GAME OVER", True, (255, 0, 0))  # Red text
+    game_music.stop()
+    game_over_sound.play()
+    game_over_font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 100)
+    text_surf = game_over_font.render("GAME OVER", True, (255, 0, 0))  # Red text
     text_rect = text_surf.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
     display_surface.blit(text_surf, text_rect)
     pygame.display.update()
@@ -136,6 +165,7 @@ pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Space Shooter 👾')
+show_start_screen()
 running = True
 clock = pygame.time.Clock()
 
@@ -145,8 +175,6 @@ meteor_surf = pygame.image.load(join('images', 'meteor.png')).convert_alpha()
 laser_surf = pygame.image.load(join('images', 'laser.png')).convert_alpha()
 font = pygame.font.Font(join('images', 'Oxanium-Bold.ttf'), 40)
 explosion_frames = [pygame.image.load(join('images', 'explosion', f'{i}.png')).convert_alpha() for i in range(21)]
-game_over_sound = pygame.mixer.Sound(join('audio', 'game_over.wav'))  # Load game over sound
-game_over_sound.set_volume(200)
 laser_sound = pygame.mixer.Sound(join('audio', 'laser.wav'))
 laser_sound.set_volume(0.2)
 explosion_sound = pygame.mixer.Sound(join('audio', 'explosion.wav'))
@@ -154,6 +182,8 @@ explosion_sound.set_volume(0.2)
 game_music = pygame.mixer.Sound(join('audio', 'game_music.wav'))
 game_music.set_volume(0.2)
 game_music.play(loops = -1)
+game_over_sound = pygame.mixer.Sound(join('audio', 'game_over.wav'))
+game_over_sound.set_volume(200)
 
 
 # sprites
