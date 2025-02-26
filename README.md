@@ -14,7 +14,7 @@ This project is inspired by the *Master Python by making 5 games [the new ultima
 
 **Links:**
 - Youtube: https://www.youtube.com/watch?v=8OMghdHP-zs&t=425s *(Timestamp: 00:06:49 - 03:12:35)*
-- GitHub: https: https://github.com/clear-code-projects/5games.git
+- GitHub: https://github.com/clear-code-projects/5games.git
 - Google Drive: https://drive.google.com/drive/folders/1wX7fITBCNNX_G_y0pn2xnk4DyEAD0QMa?usp=drive_link
 - Pygame: https://www.pygame.org/docs/
 
